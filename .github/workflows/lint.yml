@@ -1,1 +1,15 @@
+# What is goal?
+# To check what things changed means check the syntax
 
+name: Auto Linter
+
+on: 
+  push:
+    paths: "*.py"
+jobs:
+  code:
+    runs-on: ubuntu-latest
+    # this will clone the code automatically from github to runner
+    steps:
+      - name: Checkout/Clone the code
+        uses: actions/checkout@v7
