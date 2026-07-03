@@ -4,7 +4,7 @@ on:
   workflow_dispatch: 
 jobs:
   say-hello:
-    runs-on: ubbuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Say hello to everyone
         run: echo "Hello Dosto"
