@@ -1,4 +1,4 @@
-# This is from Train with shubham
+# This is code linting from Train with shubham
 from flask import Flask, render_template
 app = Flask(__name__)
 
