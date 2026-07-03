@@ -13,3 +13,6 @@ jobs:
     steps:
       - name: Checkout/Clone the code
         uses: actions/checkout@v7
+      # this will install linting tool  
+      - name: Install Linter
+        run: pip install ruff
