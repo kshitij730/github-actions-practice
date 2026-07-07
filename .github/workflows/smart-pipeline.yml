@@ -1,34 +1,47 @@
-name: Smart Trigger
+name: Smart Pipeline
 
 on:
-  push: 
+  push:
 
 jobs:
+
   lint:
+
     runs-on: ubuntu-latest
+
     steps:
       - run: echo "Lint Successful"
 
   test:
+
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "Test Successful"
+      - run: echo "Tests Passed"
 
   summary:
+
     runs-on: ubuntu-latest
-    needs: 
+
+    needs:
       - lint
       - test
+
     steps:
+
       - name: Branch
+
         run: |
-          if[[ "${{ github.ref_name }}" == "main" ]]
+
+          if [[ "${{ github.ref_name }}" == "main" ]]
 
           then
-            echo "This is main Brach"
+            echo "Main Branch Push"
           else
-            echo "This is feature Branch"
+            echo "Feature Branch Push"
+          fi
 
-      - name: Commit 
+      - name: Commit Message
+
         run: |
-          echo "${{ github.event.commits[0].message }}"
+          echo "${{ github.event.head_commit.message }}"
