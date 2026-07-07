@@ -1,23 +1,33 @@
-name: Conditional Statements
+name: Conditionals
 
 on:
   push:
   pull_request:
 
 jobs:
+
   demo:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Runs on Main Branch
+
+      - name: Only Main Branch
+
         if: github.ref == 'refs/heads/main'
+
         run: echo "Main Branch"
 
-      - name: Intentional Faliure
+      - name: Intentional Failure
+
         run: exit 1
+
         continue-on-error: true
 
-      - name: Run if previous failed
+      - name: Run if Previous Failed
+
         if: failure()
+
         run: echo "Previous Step Failed"
 
   push-job:
