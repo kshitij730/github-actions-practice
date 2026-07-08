@@ -1,0 +1,33 @@
+name: Upload and Download Artifact
+
+on:
+  push:
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create Report
+        run: |
+          mkdir reports
+          echo "CI Pipeline Passed Successfully" > reports/report.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-report
+          path: reports/report.txt
+
+  download-report:
+    needs: generate-report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ci-report
+
+      - name: Show Artifact Content
+        run: cat report.txt
