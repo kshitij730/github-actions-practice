@@ -1,0 +1,25 @@
+name: Call Reuseable workflow
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    uses: ./.github/workflows/reuseable-build.yml
+
+    with:
+      app_name: "my web app"
+      environment: "production"
+
+    secrets: 
+      docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  show_version:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Build Version = ${{ needs.build.outputs.build_version }}"
