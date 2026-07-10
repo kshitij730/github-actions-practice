@@ -1,0 +1,38 @@
+name: Setup and Greet
+
+description: Prints greeting and runner info
+
+inputs:
+  name:
+    required: true
+
+  language:
+    required: false
+    default: en
+
+outputs:
+  greeted:
+    value: ${{ steps.output.outputs.greeted }}
+
+runs:
+  # For more on composite actions, see:
+  # https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-composite-action
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        if [ "${{ inputs.language }}" = "en" ]; then
+          echo "Hello ${{ inputs.name }}"
+        else
+          echo "Namaste ${{ inputs.name }}"
+        fi
+
+    - shell: bash
+      run: |
+        echo "Date: $(date)"
+        echo "Runner: $RUNNER_OS"
+
+    - id: output
+      shell: bash
+      run: |
+        echo "greeted=true" >> "$GITHUB_OUTPUT"
