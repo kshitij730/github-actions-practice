@@ -1,0 +1,17 @@
+name: Ignore Docs
+
+on:
+  push:
+    branches:
+      - main
+      - release/**
+    paths-ignore:
+      - "*.md"
+      - "docs/**"
+
+jobs:
+  skip-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Only code changes trigger me."
