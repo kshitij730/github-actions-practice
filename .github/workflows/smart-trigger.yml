@@ -1,0 +1,17 @@
+name: Smart Trigger
+
+on:
+  push:
+    branches:
+      - main
+      - release/**
+    paths:
+      - "src/**"
+      - "app/**"
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Source code changed."
