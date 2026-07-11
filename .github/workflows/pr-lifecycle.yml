@@ -1,0 +1,26 @@
+name: Pr Lifecycle
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+
+jobs:
+  pr-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pr info
+        run: |
+          echo "Evenet: ${{ github.event.action }}"
+          echo "Title: ${{ github.event.pull_request.title }}"
+          echo "Author: ${{ github.event.pull_request.user.login }}"
+          echo "Source Branch: ${{ github.event.pull_request.head.ref }}"
+          echo "Target Branch: ${{ github.event.pull_request.base.ref }}"
+
+      - name: Pr merged
+        if: github.event.pull_request.merged == true
+        run: |
+          echo "Pr merged successfully"
